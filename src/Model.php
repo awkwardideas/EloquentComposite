@@ -8,14 +8,25 @@ use DB;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
 
-    protected function UpdateWithComposite($field){
+    protected function UpdateWithComposite($field=null){
         $query = DB::connection($this->connection)->table($this->table);
 
         foreach($this->compositeKey as $key){
             $query->where($key, $this[$key]);
         }
-        $query->update([
-            $field=>$this[$field]
-        ]);
+        if(!is_null($field)){
+            $query->update([
+                $field=>$this[$field]
+            ]);
+        }else{
+            $updateColumns = [];
+            foreach($this->fillable as $column){
+                $updateColumns[$column] = $this[$column];
+            }
+
+            $query->update([
+                $field=>$this[$field]
+            ]);
+        }
     }
 }
