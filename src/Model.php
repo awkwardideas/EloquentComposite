@@ -5,7 +5,7 @@ namespace AwkwardIdeas\EloquentComposite;
 use Illuminate\Database\Eloquent\Builder;
 use DB;
 
-class Model extends \Illuminate\Database\Eloquent\Model
+abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
 
     protected function UpdateWithComposite($field=null){
