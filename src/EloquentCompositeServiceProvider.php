@@ -1,5 +1,7 @@
 <?php namespace AwkwardIdeas\EloquentComposite;
 
+use AwkwardIdeas\EloquentComposite\Concerns\HasBelongsToManyOn;
+use AwkwardIdeas\EloquentComposite\Relations\BelongsToMany;
 use Illuminate\Support\ServiceProvider;
 
 class EloquentCompositeServiceProvider extends ServiceProvider
@@ -22,9 +24,9 @@ class EloquentCompositeServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/eloquentcomposite.php', 'eloquentcomposite');
 
-        $this->app->singleton(Model::class, function ($app) {
-            return new Model();
-        });
+        //$this->app->singleton(Model::class, function ($app) {
+        //    return new Model();
+        //});
     }
 
     /**
@@ -34,7 +36,7 @@ class EloquentCompositeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Model::class];
+        return [Model::class, BelongsToMany::class, HasBelongsToManyOn::class];
     }
 
 }
