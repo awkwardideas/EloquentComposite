@@ -2,21 +2,22 @@
 
 namespace AwkwardIdeas\EloquentComposite\Concerns;
 
-use AwkwardIdeas\EloquentComposite\Relations\BelongsToManyOn;
+use AwkwardIdeas\EloquentComposite\Relations\BelongsToManyThrough;
 
-trait HasBelongsToManyOn
+trait HasBelongsToManyThrough
 {
     /**
      * Define a many-to-many on relationship.
      *
      * @param  string  $related
+     * @param  string  $through
      * @param  string  $table
      * @param  string  $foreignKey
      * @param  string  $relatedKey
      * @param  string  $relation
-     * @return \AwkwardIdeas\EloquentComposite\Relations\BelongsToManyOn
+     * @return \AwkwardIdeas\EloquentComposite\Relations\BelongsToManyThrough
      */
-    public function belongsToManyOn($related, $table = null, $foreignKey = null, $relatedKey = null, $localKey = null, $relation = 'belongsToManyOn')
+    public function belongsToManyThrough($related, $through, $table = null, $foreignKey = null, $relatedKey = null, $farKey=null, $localKey = null, $relation = 'belongsToManyThrough')
     {
         // If no relationship name was passed, we will pull backtraces to get the
         // name of the calling function. We will use that function name as the
@@ -30,9 +31,15 @@ trait HasBelongsToManyOn
         // instances as well as the relationship instances we need for this.
         $instance = $this->newRelatedInstance($related);
 
+        $instanceFar = $this->newRelatedInstance($through);
+
         $foreignKey = $foreignKey ?: $this->getForeignKey();
 
         $relatedKey = $relatedKey ?: $instance->getForeignKey();
+
+        $farKey = $farKey ?: $instance->getKeyName();
+
+        $localKey = $localKey ?: $this->getKeyName();
 
         // If no table name was provided, we can guess it by concatenating the two
         // models using underscores in alphabetical order. The two model names
@@ -41,8 +48,8 @@ trait HasBelongsToManyOn
             $table = $this->joiningTable($related);
         }
 
-        return new BelongsToManyOn(
-            $instance->newQuery(), $this, $table, $foreignKey, $relatedKey, $localKey, $relation
+        return new BelongsToManyThrough(
+            $instance->newQuery(), $this, $instanceFar, $table, $foreignKey, $relatedKey, $farKey, $localKey, $relation
         );
     }
 }

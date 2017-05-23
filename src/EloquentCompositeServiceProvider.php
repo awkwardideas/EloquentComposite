@@ -36,7 +36,7 @@ class EloquentCompositeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Model::class, BelongsToMany::class, HasBelongsToManyOn::class];
+        return [Model::class, HasBelongsToMany::class, HasBelongsToManyOn::class];
     }
 
 }

@@ -8,6 +8,8 @@ use DB;
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
     use Concerns\HasBelongsToManyOn;
+    use Concerns\HasManyThroughOn;
+    use Concerns\HasBelongsToManyThrough;
 
     protected function UpdateWithComposite($field=null){
         $query = DB::connection($this->connection)->table($this->table);
