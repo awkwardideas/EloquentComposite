@@ -32,12 +32,12 @@ class BelongsToManyThrough extends \Illuminate\Database\Eloquent\Relations\Belon
      * @param  string  $relationName
      * @return void
      */
-    public function __construct(\Illuminate\Database\Eloquent\Builder $query, \Illuminate\Database\Eloquent\Model $parent, \Illuminate\Database\Eloquent\Model $through, $table, $foreignKey, $relatedKey, $farKey, $parentKey, $relationName = null)
+    public function __construct(\Illuminate\Database\Eloquent\Builder $query, \Illuminate\Database\Eloquent\Model $parent, \Illuminate\Database\Eloquent\Model $through, $table, $foreignPivotKey, $relatedPivotKey, $farKey, $parentKey, $relationName = null)
     {
         $this->farKey = $farKey;
         $this->through = $through;
 
-        parent::__construct($query, $parent, $table, $foreignKey, $relatedKey, $parentKey, $relationName);
+        parent::__construct($query, $parent, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relationName);
     }
 
     /**
@@ -65,8 +65,8 @@ class BelongsToManyThrough extends \Illuminate\Database\Eloquent\Relations\Belon
         // model instance. Then we can set the "where" for the parent models.
 
 
-        $key = $throughTable.'.'.$this->relatedKey;
-        $relatedKey = $this->table . '.' . $this->relatedKey;
+        $key = $throughTable.'.'.$this->relatedPivotKey;
+        $relatedKey = $this->table . '.' . $this->relatedPivotKey;
 
         $query->join($this->table, $key, '=', $relatedKey);
 
