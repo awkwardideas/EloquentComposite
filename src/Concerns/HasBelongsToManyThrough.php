@@ -17,7 +17,7 @@ trait HasBelongsToManyThrough
      * @param  string  $relation
      * @return \AwkwardIdeas\EloquentComposite\Relations\BelongsToManyThrough
      */
-    public function belongsToManyThrough($related, $through, $table = null, $foreignKey = null, $relatedKey = null, $farKey=null, $localKey = null, $relation = 'belongsToManyThrough')
+    public function belongsToManyThrough($related, $through, $table = null, $foreignKey = null, $relatedKey = null, $farKey=null, $parentKey = null, $relation = 'belongsToManyThrough')
     {
         // If no relationship name was passed, we will pull backtraces to get the
         // name of the calling function. We will use that function name as the
@@ -39,7 +39,7 @@ trait HasBelongsToManyThrough
 
         $farKey = $farKey ?: $instance->getKeyName();
 
-        $localKey = $localKey ?: $this->getKeyName();
+        $parentKey = $parentKey ?: $this->getKeyName();
 
         // If no table name was provided, we can guess it by concatenating the two
         // models using underscores in alphabetical order. The two model names
@@ -49,7 +49,7 @@ trait HasBelongsToManyThrough
         }
 
         return new BelongsToManyThrough(
-            $instance->newQuery(), $this, $instanceFar, $table, $foreignKey, $relatedKey, $farKey, $localKey, $relation
+            $instance->newQuery(), $this, $instanceFar, $table, $foreignKey, $relatedKey, $farKey, $parentKey, $relation
         );
     }
 }

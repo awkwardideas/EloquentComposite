@@ -2,7 +2,7 @@
 
 namespace AwkwardIdeas\EloquentComposite\Relations;
 
-class BelongsToManyThrough extends \AwkwardIdeas\EloquentComposite\Relations\BelongsToManyOn
+class BelongsToManyThrough extends \Illuminate\Database\Eloquent\Relations\BelongsToMany
 {
 
     /**
@@ -32,12 +32,12 @@ class BelongsToManyThrough extends \AwkwardIdeas\EloquentComposite\Relations\Bel
      * @param  string  $relationName
      * @return void
      */
-    public function __construct(\Illuminate\Database\Eloquent\Builder $query, \Illuminate\Database\Eloquent\Model $parent, \Illuminate\Database\Eloquent\Model $through, $table, $foreignKey, $relatedKey, $farKey, $localKey, $relationName = null)
+    public function __construct(\Illuminate\Database\Eloquent\Builder $query, \Illuminate\Database\Eloquent\Model $parent, \Illuminate\Database\Eloquent\Model $through, $table, $foreignKey, $relatedKey, $farKey, $parentKey, $relationName = null)
     {
         $this->farKey = $farKey;
         $this->through = $through;
 
-        parent::__construct($query, $parent, $table, $foreignKey, $relatedKey, $localKey, $relationName);
+        parent::__construct($query, $parent, $table, $foreignKey, $relatedKey, $parentKey, $relationName);
     }
 
     /**
