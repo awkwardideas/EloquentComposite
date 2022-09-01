@@ -2,5 +2,5 @@
 
 return [
     'class'         => \AwkwardIdeas\EloquentComposite\Model::class,
-    'class'         => \AwkwardIdeas\EloquentComposite\Concerns\HasBelongsToManyThrough::class
+    'class'         => \AwkwardIdeas\EloquentComposite\Database\Eloquent\Concerns\HasBelongsToManyThrough::class
 ];

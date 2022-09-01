@@ -1,8 +1,8 @@
 <?php
 
-namespace AwkwardIdeas\EloquentComposite\Concerns;
+namespace AwkwardIdeas\EloquentComposite\Database\Eloquent\Concerns;
 
-use AwkwardIdeas\EloquentComposite\Relations\BelongsToManyThrough;
+use AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations\BelongsToManyThrough;
 
 trait HasBelongsToManyThrough
 {
@@ -15,7 +15,7 @@ trait HasBelongsToManyThrough
      * @param  string  $foreignKey
      * @param  string  $relatedKey
      * @param  string  $relation
-     * @return \AwkwardIdeas\EloquentComposite\Relations\BelongsToManyThrough
+     * @return \AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations\BelongsToManyThrough
      */
     public function belongsToManyThrough($related, $through, $table = null, $foreignKey = null, $relatedKey = null, $farKey=null, $parentKey = null, $relation = 'belongsToManyThrough')
     {

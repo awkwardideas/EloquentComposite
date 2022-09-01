@@ -1,6 +1,6 @@
 <?php
 
-namespace AwkwardIdeas\EloquentComposite\Relations;
+namespace AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations;
 
 class BelongsToManyThrough extends \Illuminate\Database\Eloquent\Relations\BelongsToMany
 {
