@@ -30,10 +30,7 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
             foreach ($this->fillable as $column) {
                 $updateColumns[$column] = $this[$column];
             }
-
-            $query->update([
-                $field => $this[$field]
-            ]);
+            $query->update([$updateColumns]);
         }
     }
 }
