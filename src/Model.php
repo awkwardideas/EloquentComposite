@@ -3,11 +3,10 @@
 namespace AwkwardIdeas\EloquentComposite;
 
 use Illuminate\Support\Facades\DB;
-use AwkwardIdeas\EloquentComposite\Compoships;
 
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
-    use Compoships;
+    use HasCompositeRelationships;
     use Database\Eloquent\Concerns\HasBelongsToManyThrough;
 
     /**

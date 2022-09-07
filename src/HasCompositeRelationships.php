@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 //https://github.com/topclaudy/compoships
 
-trait Compoships
+trait HasCompositeRelationships
 {
     use HasRelationships;
 
