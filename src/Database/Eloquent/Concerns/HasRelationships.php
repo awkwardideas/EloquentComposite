@@ -2,7 +2,7 @@
 
 namespace AwkwardIdeas\EloquentComposite\Database\Eloquent\Concerns;
 
-use AwkwardIdeas\EloquentComposite\Compoships;
+use AwkwardIdeas\EloquentComposite\HasCompositeRelationships;
 use AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations\BelongsTo;
 use AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations\HasMany;
 use AwkwardIdeas\EloquentComposite\Database\Eloquent\Relations\HasOne;
@@ -95,7 +95,7 @@ trait HasRelationships
      */
     private function validateRelatedModel($related)
     {
-        $traitClass = Compoships::class;
+        $traitClass = HasCompositeRelationships::class;
         if (!array_key_exists($traitClass, class_uses_recursive($related))) {
             throw new InvalidUsageException("The related model '{$related}' must use the '{$traitClass}' trait");
         }

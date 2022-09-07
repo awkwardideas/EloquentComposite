@@ -2,14 +2,17 @@
 
 namespace AwkwardIdeas\EloquentComposite;
 
-use DB;
-use Illuminate\Database\Eloquent\Builder;
-use AwkwardIdeas\EloquentComposite\Compoships;
+use Illuminate\Support\Facades\DB;
 
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
-    use Compoships;
+    use HasCompositeRelationships;
     use Database\Eloquent\Concerns\HasBelongsToManyThrough;
+
+    /**
+     * @var array $compositeKey Columns that make up the composite key
+     */
+    protected $compositeKey = [];
 
     protected function UpdateWithComposite($field = null)
     {
@@ -27,10 +30,7 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
             foreach ($this->fillable as $column) {
                 $updateColumns[$column] = $this[$column];
             }
-
-            $query->update([
-                $field => $this[$field]
-            ]);
+            $query->update([$updateColumns]);
         }
     }
 }
