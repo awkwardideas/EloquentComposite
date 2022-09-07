@@ -2,14 +2,18 @@
 
 namespace AwkwardIdeas\EloquentComposite;
 
-use DB;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use AwkwardIdeas\EloquentComposite\Compoships;
 
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
     use Compoships;
     use Database\Eloquent\Concerns\HasBelongsToManyThrough;
+
+    /**
+     * @var array $compositeKey Columns that make up the composite key
+     */
+    protected $compositeKey = [];
 
     protected function UpdateWithComposite($field = null)
     {
